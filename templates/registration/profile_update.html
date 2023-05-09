@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile update {% endblock %}
+
+{% block main-content %}
+<div class="row container text-center">
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p>Username: {{ form.username }}<p>
+  <p>Image: {{ form.image }}<p>
+  <p>Email: {{ form.email }}<p>
+  <p>Address: {{ form.address }}<p>
+  <p>Birthday: {{ form.birth_date }}<p>
+  <button class="btn btn-success" type="submit">Profile Edit</button>
+</form>
+</div>
+{% endblock %}
