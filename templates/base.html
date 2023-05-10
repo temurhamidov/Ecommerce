@@ -10,7 +10,7 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="{% static 'images/neel.png' %}" width="70" height="50"/>
@@ -42,7 +42,7 @@
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <button class="btn btn-outline-white" type="submit">Search</button>
       </form>
     </div>
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -53,7 +53,7 @@
           </a>
             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Orders</a></li>
+                <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                 <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">LogOut</a></li>
             </ul>
@@ -62,7 +62,7 @@
             <a href="{% url 'showcart' %}" class="nav-link text-white">Cart</a>
         </li>
         <li class="nav-item mx-2">
-            <a href="#" class="nav-link text-white">Orders</a>
+            <a href="{% url 'orders' %}" class="nav-link text-white">Orders</a>
         </li>
         {% else %}
         <li class="nav-item mx-2">
@@ -79,7 +79,7 @@
     {% block information %} {% endblock %}
     {% block main-content %} {% endblock %}
     {% block payment-gateway %} {% endblock %}
-<footer class="container-fluid fixed-bottom bg-success text-center p-2 mt-5">
+<footer class="container-fluid fixed-bottom bg-primary text-center p-2 mt-5">
     Copyright : 2023 || Develop by : Khamedov Temur
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>

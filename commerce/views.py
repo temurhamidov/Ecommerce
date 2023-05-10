@@ -70,11 +70,21 @@ class Checkout(View):
             value = p.quantity * p.product.discounted_price
             famount = famount + value
         totalamount = famount + 40
-        razoramount = int(totalamount * 100)
         return render(request, 'checkout.html', locals())
+    def post(self, request):
+        user = request.user
+        # customer = Customer.objects.filter(user=user)
+        cart_items = Cart.objects.filter(user=user)
+        for p in cart_items:
+            OrderPlaced(customer=p.user, product=p.product, quantity=p.quantity).save()
+        cart_items.delete()
+        return render(request, 'payment_done.html')
 
-def payment_done(request):
-    return render(request, 'payment_done.html')
+
+class OrderView(ListView):
+    model = OrderPlaced
+    context_object_name = 'order'
+    template_name = 'orders.html'
 
 
 def PlusCart(request):

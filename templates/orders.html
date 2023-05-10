@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock %}
+{% block main-content %}
+<div class="container mb-5">
+    <div class="row">
+        {% if order %}
+        <h1 class="text-center mb-5">Orders</h1>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Cart</h3>
+                    {% for item in order %}
+                    <div class="row">
+                        <div class="col-sm-3 text-center align-self-center">
+                            <img src="{{ item.product.product_image.url }}" alt="" srcset=""
+                                 class="img-fluid img-thumbnail shadow-sm" height="150" width="150">
+                        </div>
+                        <div class="col-sm-9">
+                            <div>
+                                <h5>{{ item.product.title }}</h5>
+                                <p class="mb-2 text-muted small">{{ item.product.description }}</p>
+                                <div class="my-3">
+                                    <label for="quantity">Quantity:</label>
+                                        <span id="quantity">{{ item.quantity }}</span>
+                                    <p>
+                                    <label for="quantity1">Status:</label>
+                                        <span id="quantity1">{{ item.status }}</span>
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-0"><span><strong>Rs. {{ item.product.discounted_price }}</strong></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="text-muted">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <h1 class="text-center mb-5">Order is Empty</h1>
+        {% endif %}
+    </div>
+</div>
+{% endblock main-content %}

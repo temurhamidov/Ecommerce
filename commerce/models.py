@@ -61,13 +61,19 @@ class Payment(models.Model):
 
 
 class OrderPlaced(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     ordered_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending')
+    quantity = models.PositiveIntegerField(default=1)
+
 
     def __str__(self):
-        return self.customer
+        return self.product.title
+
+    @property
+    def total_cost(self):
+        return self.quantity * self.product.discounted_price
 
 
 
