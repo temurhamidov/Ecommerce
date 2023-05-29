@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 import razorpay
 from django.conf import settings
 from django.http import JsonResponse
@@ -42,14 +44,23 @@ class ProductDetail(View):
         return render(request, 'productdetail.html', locals())
 
 
-def AddToCart(request):
+def AddToCart( request):
     user = request.user
     product_id = request.GET.get('prod_id')
     product = Product.objects.get(id=product_id)
     Cart(user=user, product=product).save()
     return redirect('/cart')
 
-def ShowCart(request):
+class AddToCart1(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        product_id = request.GET.get('prod_id')
+        product = Product.objects.get(id=product_id)
+        Cart(user=user, product=product).save()
+        return redirect('/cart')
+
+
+def ShowCart( request):
     user = request.user
     cart = Cart.objects.filter(user=user)
     amount = 0
